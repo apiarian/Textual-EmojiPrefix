@@ -6,9 +6,16 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1F205D341C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F205D331C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1F205D281C02422B002A59C4 /* Textual-EmojiPrefix.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual-EmojiPrefix.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F205D2B1C02422B002A59C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F205D321C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPEmojiPrefixPrincipalClass.h; sourceTree = "<group>"; };
+		1F205D331C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPEmojiPrefixPrincipalClass.m; sourceTree = "<group>"; };
+		1F205D4A1C024D99002A59C4 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = ../../../../../../Applications/Textual.app/Contents/Headers; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +48,10 @@
 		1F205D2A1C02422B002A59C4 /* Textual-EmojiPrefix */ = {
 			isa = PBXGroup;
 			children = (
+				1F205D4A1C024D99002A59C4 /* Headers */,
 				1F205D2B1C02422B002A59C4 /* Info.plist */,
+				1F205D321C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.h */,
+				1F205D331C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m */,
 			);
 			path = "Textual-EmojiPrefix";
 			sourceTree = "<group>";
@@ -112,6 +122,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F205D341C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,9 +211,12 @@
 		1F205D2F1C02422B002A59C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "/Applications/Textual.app/Contents/Frameworks/**";
+				HEADER_SEARCH_PATHS = "/Applications/Textual.app/Contents/Headers/**";
 				INFOPLIST_FILE = "Textual-EmojiPrefix/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "\"$(USER_LIBRARY_DIR)/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.megamicron.Textual-EmojiPrefix";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -213,9 +227,12 @@
 		1F205D301C02422B002A59C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "/Applications/Textual.app/Contents/Frameworks/**";
+				HEADER_SEARCH_PATHS = "/Applications/Textual.app/Contents/Headers/**";
 				INFOPLIST_FILE = "Textual-EmojiPrefix/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "\"$(USER_LIBRARY_DIR)/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.megamicron.Textual-EmojiPrefix";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

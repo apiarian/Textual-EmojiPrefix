@@ -20,9 +20,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>MinimumTextualVersion</key>
+	<string>5.0.0</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2015 Megamicron. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string></string>
+	<string>TEPEmojiPrefixPrincipalClass</string>
 </dict>
 </plist>
