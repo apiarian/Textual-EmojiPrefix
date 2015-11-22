@@ -1,5 +1,5 @@
 //
-//  TEPEmojiPrefixPrincipalClass.h
+//  TPIEmojiPrefixPrincipalClass.h
 //  Textual-EmojiPrefix
 //
 //  Created by Aleksandr Pasechnik on 11/22/15Su.

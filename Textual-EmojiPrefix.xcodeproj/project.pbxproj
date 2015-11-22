@@ -66,7 +66,7 @@
 				1F205D241C02422B002A59C4 /* Sources */,
 				1F205D251C02422B002A59C4 /* Frameworks */,
 				1F205D261C02422B002A59C4 /* Resources */,
-				1F205D4D1C02554F002A59C4 /* ShellScript */,
+				1F205D4D1C02554F002A59C4 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -119,18 +119,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1F205D4D1C02554F002A59C4 /* ShellScript */ = {
+		1F205D4D1C02554F002A59C4 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"/Users/aleksandr/Library/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions/Textual-EmojiPrefix.bundle\"\ncp -R ${TARGET_BUILD_DIR}/Textual-EmojiPrefix.bundle \"/Users/aleksandr/Library/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions/\"";
+			shellScript = "rm -rf \"$HOME/Library/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions/Textual-EmojiPrefix.bundle\"\ncp -R ${TARGET_BUILD_DIR}/Textual-EmojiPrefix.bundle \"$HOME/Library/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions/\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -276,6 +277,7 @@
 				1F205D301C02422B002A59C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
