@@ -10,6 +10,6 @@
 
 #import "TextualApplication.h"
 
-@interface TEPEmojiPrefixPrincipalClass : NSObject <THOPluginProtocol>
+@interface TPIEmojiPrefixPrincipalClass : NSObject <THOPluginProtocol>
 
 @end

@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F205D341C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F205D331C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m */; };
+		1F205D341C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F205D281C02422B002A59C4 /* Textual-EmojiPrefix.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual-EmojiPrefix.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F205D2B1C02422B002A59C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F205D321C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEPEmojiPrefixPrincipalClass.h; sourceTree = "<group>"; };
-		1F205D331C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEPEmojiPrefixPrincipalClass.m; sourceTree = "<group>"; };
+		1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPIEmojiPrefixPrincipalClass.h; sourceTree = "<group>"; };
+		1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPIEmojiPrefixPrincipalClass.m; sourceTree = "<group>"; };
 		1F205D4A1C024D99002A59C4 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = ../../../../../../Applications/Textual.app/Contents/Headers; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,8 +50,8 @@
 			children = (
 				1F205D4A1C024D99002A59C4 /* Headers */,
 				1F205D2B1C02422B002A59C4 /* Info.plist */,
-				1F205D321C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.h */,
-				1F205D331C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m */,
+				1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */,
+				1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */,
 			);
 			path = "Textual-EmojiPrefix";
 			sourceTree = "<group>";
@@ -66,6 +66,7 @@
 				1F205D241C02422B002A59C4 /* Sources */,
 				1F205D251C02422B002A59C4 /* Frameworks */,
 				1F205D261C02422B002A59C4 /* Resources */,
+				1F205D4D1C02554F002A59C4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -117,12 +118,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1F205D4D1C02554F002A59C4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf \"/Users/aleksandr/Library/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions/Textual-EmojiPrefix.bundle\"\ncp -R ${TARGET_BUILD_DIR}/Textual-EmojiPrefix.bundle \"/Users/aleksandr/Library/Group Containers/com.codeux.apps.textual/Library/Application Support/Textual/Extensions/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1F205D241C02422B002A59C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F205D341C024453002A59C4 /* TEPEmojiPrefixPrincipalClass.m in Sources */,
+				1F205D341C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

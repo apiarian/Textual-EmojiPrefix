@@ -6,9 +6,9 @@
 //  Copyright © 2015 Megamicron. All rights reserved.
 //
 
-#import "TEPEmojiPrefixPrincipalClass.h"
+#import "TPIEmojiPrefixPrincipalClass.h"
 
-@implementation TEPEmojiPrefixPrincipalClass
+@implementation TPIEmojiPrefixPrincipalClass
 
 - (void) pluginLoadedIntoMemory {
     NSLog(@"Hello world!!");

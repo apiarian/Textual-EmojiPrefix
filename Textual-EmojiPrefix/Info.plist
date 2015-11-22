@@ -25,6 +25,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2015 Megamicron. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string>TEPEmojiPrefixPrincipalClass</string>
+	<string>TPIEmojiPrefixPrincipalClass</string>
 </dict>
 </plist>
