@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F02F8FE1C036C9E009F1BFD /* TPIEmojiGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F8FD1C036C9E009F1BFD /* TPIEmojiGenerator.m */; };
 		1F205D341C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F02F8FC1C036C9E009F1BFD /* TPIEmojiGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPIEmojiGenerator.h; sourceTree = "<group>"; };
+		1F02F8FD1C036C9E009F1BFD /* TPIEmojiGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPIEmojiGenerator.m; sourceTree = "<group>"; };
 		1F205D281C02422B002A59C4 /* Textual-EmojiPrefix.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual-EmojiPrefix.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F205D2B1C02422B002A59C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPIEmojiPrefixPrincipalClass.h; sourceTree = "<group>"; };
@@ -52,6 +55,8 @@
 				1F205D2B1C02422B002A59C4 /* Info.plist */,
 				1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */,
 				1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */,
+				1F02F8FC1C036C9E009F1BFD /* TPIEmojiGenerator.h */,
+				1F02F8FD1C036C9E009F1BFD /* TPIEmojiGenerator.m */,
 			);
 			path = "Textual-EmojiPrefix";
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F02F8FE1C036C9E009F1BFD /* TPIEmojiGenerator.m in Sources */,
 				1F205D341C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
