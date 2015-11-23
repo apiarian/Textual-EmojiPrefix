@@ -50,8 +50,9 @@ NSMutableDictionary *_emojiCache;
     
     // adapted from IRC/IRCUser.m hashForString:colorStyle
     // also adapted from Styles/Equinox/scripts.js
+    // backticks, underscores, and dashes at the beginning and end, and everything after a pipe, replaced by empty strings
     NSString *stringToHash = [[nickname lowercaseString]
-                              stringByReplacingOccurrencesOfString:@"(^[`_-]+)|([`_-]+$)|(|.*$)" //backticks, underscores, and dashes at the beginning and end, and everything after a pipe
+                              stringByReplacingOccurrencesOfString:@"(^[`_-]+)|([`_-]+$)|(|.*$)"
                               withString:@""
                               options:NSRegularExpressionSearch
                               range:NSMakeRange(0, [nickname length])];
