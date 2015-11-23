@@ -55,3 +55,48 @@
 }
 
 @end
+
+@implementation TVCLogRenderer (EmojiPrefixes)
+
++ (void) load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = object_getClass((id) self);
+        
+        SEL originalSelector = @selector(renderTemplate:attributes:);
+        SEL swizzledSelector = @selector(prefix_emoji_renderTemplate:attributes:);
+        
+        Method originalMethod = class_getClassMethod(class, originalSelector);
+        Method swizzledMethod = class_getClassMethod(class, swizzledSelector);
+        
+        BOOL didAddMethod =
+        class_addMethod(class,
+                        originalSelector,
+                        method_getImplementation(swizzledMethod),
+                        method_getTypeEncoding(swizzledMethod));
+        if (didAddMethod) {
+            class_replaceMethod(class,
+                                swizzledSelector,
+                                method_getImplementation(originalMethod),
+                                method_getTypeEncoding(originalMethod));
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    });
+}
+
++ (NSString *)prefix_emoji_renderTemplate:(NSString *)templateName attributes:(NSDictionary *)templateTokens
+{
+    if ([templateTokens objectForKey:@"inlineNicknameMatchFound"]) {
+        NSLog(@"swizzling with messageFragment '%@'", [templateTokens objectForKey:@"messageFragment"]);
+        NSMutableDictionary *modifiedTokens = [NSMutableDictionary dictionaryWithDictionary:templateTokens];
+        NSString *nickname = [templateTokens objectForKey:@"messageFragment"];
+        NSString *emoji = [[TPIEmojiGenerator sharedGenerator] getEmojiForNickname:nickname];
+        [modifiedTokens setObject:[NSString stringWithFormat:@"%@ %@",emoji,nickname]
+                           forKey:@"messageFragment"];
+        return [TVCLogRenderer prefix_emoji_renderTemplate:templateName attributes:modifiedTokens];
+    }
+    return [TVCLogRenderer prefix_emoji_renderTemplate:templateName attributes:templateTokens];
+}
+
+@end
