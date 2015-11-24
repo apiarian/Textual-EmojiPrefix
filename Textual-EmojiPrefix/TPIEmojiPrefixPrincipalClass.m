@@ -12,9 +12,112 @@
 
 #import "TPIEmojiGenerator.h"
 
+#import <CocoaExtensions/XRGlobalModels.h>
+
+@interface TPIEmojiPrefixPrincipalClass () <NSTableViewDelegate>
+
+@property (nonatomic, strong) IBOutlet NSView *preferencesPane;
+@property (nonatomic, strong) IBOutlet NSTableView *overrideTableView;
+@property (nonatomic, strong) IBOutlet NSTextField *playgroundNicknameField;
+@property (nonatomic, strong) IBOutlet NSTextField *playgroundEmojiField;
+
+- (IBAction)addOverrideButtonClicked:(id)sender;
+- (IBAction)removeOverrideButtonClicked:(id)sender;
+
+@end
+
+
+@implementation NSMutableDictionary (NSTableViewDataSource)
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+    return [self count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    id key = [[self sortedDictionaryKeys] objectAtIndex:rowIndex];
+    if ([[aTableColumn identifier] isEqualToString:@"nickname"]) {
+        return key;
+    } else {
+        return [self objectForKey:key];
+    }
+}
+
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    id key = [[self sortedDictionaryKeys] objectAtIndex:rowIndex];
+    id newKey = nil;
+    if ([[aTableColumn identifier] isEqualToString:@"nickname"]) {
+        newKey = [[TPIEmojiGenerator sharedGenerator] preprocessNicknameString:anObject];
+        id oldValue = [self objectForKey:key];
+        [self removeObjectForKey:key];
+        [self setObject:oldValue forKey:newKey];
+    } else {
+        [self setValue:anObject forKey:key];
+    }
+    [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:key];
+    if (newKey != nil) {
+        [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:newKey];
+    }
+}
+
+@end
+
 @implementation TPIEmojiPrefixPrincipalClass
 
 - (void) pluginLoadedIntoMemory {
+    [self performBlockOnMainThread:^{
+        [TPIBundleFromClass() loadNibNamed:@"TPIEmojiPrefixPane"
+                                     owner:self
+                           topLevelObjects:nil];  
+    }];
+    [self.overrideTableView setDataSource:[[TPIEmojiGenerator sharedGenerator] overrideTable]];
+}
+
+- (IBAction)addOverrideButtonClicked:(id)sender {
+    NSString *nickname = [[TPIEmojiGenerator sharedGenerator] preprocessNicknameString:[self.playgroundNicknameField stringValue]];
+    if ([nickname length] > 0) {
+        NSString *emoji = [self.playgroundEmojiField stringValue];
+        [[[TPIEmojiGenerator sharedGenerator] overrideTable] setObject:emoji forKey:nickname];
+        [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:nickname];
+        [self.overrideTableView reloadData];
+        [self.playgroundNicknameField setStringValue:@""];
+        [self.playgroundEmojiField setStringValue:@""];
+    }
+}
+
+- (IBAction)removeOverrideButtonClicked:(id)sender {
+    NSIndexSet *selectedRows = [self.overrideTableView selectedRowIndexes];
+    if ([selectedRows count] > 0) {
+        NSArray *rowKeys = [[[TPIEmojiGenerator sharedGenerator] overrideTable] sortedDictionaryKeys];
+        [selectedRows enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
+            NSString *key = [rowKeys objectAtIndex:idx];
+            [[[TPIEmojiGenerator sharedGenerator] overrideTable] removeObjectForKey:key];
+            [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:key];
+        }];
+        [self.overrideTableView reloadData];
+    }
+}
+
+- (NSView *)pluginPreferencesPaneView {
+    return self.preferencesPane;
+}
+
+- (NSString *)pluginPreferencesPaneMenuItemName {
+    return @"Emoji Prefixes";
+}
+
+- (void)controlTextDidChange:(NSNotification *)obj {
+    NSMutableString *nickname = [[self.playgroundNicknameField stringValue] mutableCopy];
+    [nickname replaceOccurrencesOfString:@"[ ]+"
+                              withString:@""
+                                 options:NSRegularExpressionSearch
+                                   range:NSMakeRange(0, [nickname length])];
+    if ([nickname length] > 0) {
+        NSString *emoji = [[TPIEmojiGenerator sharedGenerator] getEmojiForNickname:nickname];
+        [self.playgroundEmojiField setStringValue:emoji];
+    } else {
+        [self.playgroundEmojiField setStringValue:@""];
+    }
+    [self.playgroundNicknameField setStringValue:nickname];
 }
 
 @end
@@ -22,30 +125,7 @@
 @implementation TVCLogLine (EmojiPrefixes)
 
 + (void) load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        
-        SEL originalSelector = @selector(formattedNickname:);
-        SEL swizzledSelector = @selector(prefix_emoji_formattedNickname:);
-        
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-        
-        BOOL didAddMethod =
-            class_addMethod(class,
-                            originalSelector,
-                            method_getImplementation(swizzledMethod),
-                            method_getTypeEncoding(swizzledMethod));
-        if (didAddMethod) {
-            class_replaceMethod(class,
-                                swizzledSelector,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
+    XRExchangeImplementation(@"TVCLogLine", @"formattedNickname:", @"prefix_emoji_formattedNickname:");
 }
 
 - (NSString *)prefix_emoji_formattedNickname:(IRCChannel *) owner {
@@ -103,30 +183,7 @@
 @implementation TVCMemberListCell (EmojiPrefixes)
 
 + (void) load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        
-        SEL originalSelector = @selector(updateDrawing:);
-        SEL swizzledSelector = @selector(prefix_emoji_updateDrawing:);
-        
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-        
-        BOOL didAddMethod =
-        class_addMethod(class,
-                        originalSelector,
-                        method_getImplementation(swizzledMethod),
-                        method_getTypeEncoding(swizzledMethod));
-        if (didAddMethod) {
-            class_replaceMethod(class,
-                                swizzledSelector,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
+    XRExchangeImplementation(@"TVCMemberListCell", @"updateDrawing:", @"prefix_emoji_updateDrawing:");
 }
 
 - (void)prefix_emoji_updateDrawing:(id)interfaceObject {
@@ -146,3 +203,4 @@
 }
 
 @end
+
