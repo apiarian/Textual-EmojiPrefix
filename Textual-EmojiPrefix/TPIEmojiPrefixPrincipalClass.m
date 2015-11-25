@@ -14,6 +14,8 @@
 
 #import <CocoaExtensions/XRGlobalModels.h>
 
+NSString * const _userDefaultsOverrideTableKey = @"Private Extension Store -> Emoji Prefix Extension -> Override Table";
+
 @interface TPIEmojiPrefixPrincipalClass () <NSTableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet NSView *preferencesPane;
@@ -22,42 +24,8 @@
 @property (nonatomic, strong) IBOutlet NSTextField *playgroundEmojiField;
 
 - (IBAction)addOverrideButtonClicked:(id)sender;
+- (IBAction)playgroundEmojiFieldAction:(id)sender;
 - (IBAction)removeOverrideButtonClicked:(id)sender;
-
-@end
-
-
-@implementation NSMutableDictionary (NSTableViewDataSource)
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return [self count];
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-    id key = [[self sortedDictionaryKeys] objectAtIndex:rowIndex];
-    if ([[aTableColumn identifier] isEqualToString:@"nickname"]) {
-        return key;
-    } else {
-        return [self objectForKey:key];
-    }
-}
-
-- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-    id key = [[self sortedDictionaryKeys] objectAtIndex:rowIndex];
-    id newKey = nil;
-    if ([[aTableColumn identifier] isEqualToString:@"nickname"]) {
-        newKey = [[TPIEmojiGenerator sharedGenerator] preprocessNicknameString:anObject];
-        id oldValue = [self objectForKey:key];
-        [self removeObjectForKey:key];
-        [self setObject:oldValue forKey:newKey];
-    } else {
-        [self setValue:anObject forKey:key];
-    }
-    [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:key];
-    if (newKey != nil) {
-        [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:newKey];
-    }
-}
 
 @end
 
@@ -69,7 +37,16 @@
                                      owner:self
                            topLevelObjects:nil];  
     }];
+    NSDictionary *storedOverrideTable = [RZUserDefaults() objectForKey:_userDefaultsOverrideTableKey];
+    if (storedOverrideTable != nil) {
+        [[[TPIEmojiGenerator sharedGenerator] overrideTable] addEntriesFromDictionary:storedOverrideTable];
+    }
     [self.overrideTableView setDataSource:[[TPIEmojiGenerator sharedGenerator] overrideTable]];
+}
+
+- (void) pluginWillBeUnloadedFromMemory {
+    [RZUserDefaults() setObject:[[[TPIEmojiGenerator sharedGenerator] overrideTable] copy]
+                         forKey:_userDefaultsOverrideTableKey];
 }
 
 - (IBAction)addOverrideButtonClicked:(id)sender {
@@ -82,6 +59,11 @@
         [self.playgroundNicknameField setStringValue:@""];
         [self.playgroundEmojiField setStringValue:@""];
     }
+    [[self.playgroundNicknameField window] makeFirstResponder:self.playgroundNicknameField];
+}
+
+- (IBAction)playgroundEmojiFieldAction:(id)sender {
+    [self addOverrideButtonClicked:sender];
 }
 
 - (IBAction)removeOverrideButtonClicked:(id)sender {
@@ -200,6 +182,40 @@
                                     options:NSLiteralSearch
                                       range:NSMakeRange(0, [labelString length])];
     [textField setAttributedStringValue:label];
+}
+
+@end
+
+@implementation NSMutableDictionary (NSTableViewDataSource)
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+    return [self count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    id key = [[self sortedDictionaryKeys] objectAtIndex:rowIndex];
+    if ([[aTableColumn identifier] isEqualToString:@"nickname"]) {
+        return key;
+    } else {
+        return [self objectForKey:key];
+    }
+}
+
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    id key = [[self sortedDictionaryKeys] objectAtIndex:rowIndex];
+    id newKey = nil;
+    if ([[aTableColumn identifier] isEqualToString:@"nickname"]) {
+        newKey = [[TPIEmojiGenerator sharedGenerator] preprocessNicknameString:anObject];
+        id oldValue = [self objectForKey:key];
+        [self removeObjectForKey:key];
+        [self setObject:oldValue forKey:newKey];
+    } else {
+        [self setValue:anObject forKey:key];
+    }
+    [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:key];
+    if (newKey != nil) {
+        [[TPIEmojiGenerator sharedGenerator] removeNicknameFromCache:newKey];
+    }
 }
 
 @end
