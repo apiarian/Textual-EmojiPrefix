@@ -1,5 +1,7 @@
 # Textual-EmojiPrefix
 
+![Screenshot](/apiarian/Textual-EmojiPrefix/raw/master/Textual-EmojiPrefix-Screenshot.png?raw=true "Screenshot")
+
 A plugin for the Textual IRC client. https://www.codeux.com/textual/
 
 Prifix nicknames with emoji. Or any other character you want. The default implementation does stick to emoji, though.

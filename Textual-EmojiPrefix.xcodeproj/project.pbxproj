@@ -26,6 +26,7 @@
 		1F205D4A1C024D99002A59C4 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = ../../../../../../Applications/Textual.app/Contents/Headers; sourceTree = "<group>"; };
 		1FE2B7F61C07584500F19E8D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1FE2B7F71C07594B00F19E8D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
+		1FE2B7F91C075A1D00F19E8D /* Textual-EmojiPrefix-Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Textual-EmojiPrefix-Screenshot.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +44,7 @@
 		1F205D1F1C02422B002A59C4 = {
 			isa = PBXGroup;
 			children = (
+				1FE2B7F91C075A1D00F19E8D /* Textual-EmojiPrefix-Screenshot.png */,
 				1FE2B7F61C07584500F19E8D /* README.md */,
 				1FE2B7F71C07594B00F19E8D /* LICENSE.txt */,
 				1F205D2A1C02422B002A59C4 /* Textual-EmojiPrefix */,
