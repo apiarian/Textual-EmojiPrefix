@@ -1,6 +1,6 @@
 # Textual-EmojiPrefix
 
-![Screenshot](/apiarian/Textual-EmojiPrefix/raw/master/Textual-EmojiPrefix-Screenshot.png?raw=true "Screenshot")
+![Screenshot](/Textual-EmojiPrefix-Screenshot.png?raw=true "Screenshot")
 
 A plugin for the Textual IRC client. https://www.codeux.com/textual/
 
