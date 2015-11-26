@@ -2,8 +2,8 @@
 //  TPIEmojiGenerator.h
 //  Textual-EmojiPrefix
 //
-//  Created by Aleksandr Pasechnik on 11/23/15Mo.
-//  Copyright © 2015 Megamicron. All rights reserved.
+//  Created by Aleksandr Pasechnik on 11/23/15
+//  Copyright © 2015 Aleksandr Pasechnik. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

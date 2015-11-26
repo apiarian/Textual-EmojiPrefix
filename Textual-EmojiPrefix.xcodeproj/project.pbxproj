@@ -11,6 +11,7 @@
 		1F02F9001C03E7B2009F1BFD /* TPIEmojiPrefixPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F02F8FF1C03E7B2009F1BFD /* TPIEmojiPrefixPane.xib */; };
 		1F02F9021C03FAEB009F1BFD /* CocoaExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F02F9011C03FA41009F1BFD /* CocoaExtensions.framework */; };
 		1F205D341C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */; };
+		1FE2B7F81C07594B00F19E8D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FE2B7F71C07594B00F19E8D /* LICENSE.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,8 @@
 		1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPIEmojiPrefixPrincipalClass.h; sourceTree = "<group>"; };
 		1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPIEmojiPrefixPrincipalClass.m; sourceTree = "<group>"; };
 		1F205D4A1C024D99002A59C4 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = ../../../../../../Applications/Textual.app/Contents/Headers; sourceTree = "<group>"; };
+		1FE2B7F61C07584500F19E8D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1FE2B7F71C07594B00F19E8D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +43,8 @@
 		1F205D1F1C02422B002A59C4 = {
 			isa = PBXGroup;
 			children = (
+				1FE2B7F61C07584500F19E8D /* README.md */,
+				1FE2B7F71C07594B00F19E8D /* LICENSE.txt */,
 				1F205D2A1C02422B002A59C4 /* Textual-EmojiPrefix */,
 				1F205D291C02422B002A59C4 /* Products */,
 			);
@@ -125,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FE2B7F81C07594B00F19E8D /* LICENSE.txt in Resources */,
 				1F02F9001C03E7B2009F1BFD /* TPIEmojiPrefixPane.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
