@@ -41,6 +41,7 @@ NSMutableDictionary *_emojiCache;
         _emojiArray = [NSArray arrayWithArray:[_emojiString componentsSeparatedByString:@" "]];
         _emojiCache = [[NSMutableDictionary alloc] init];
         self.overrideTable = [[NSMutableDictionary alloc] init];
+        self.messageSenderEmojiPosition = TPIEmojiMessageSenderPositionPrefix;
     }
     return self;
 }

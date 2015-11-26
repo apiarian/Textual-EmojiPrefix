@@ -8,11 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+
+typedef enum : NSUInteger {
+    TPIEmojiMessageSenderPositionPrefix,
+    TPIEmojiMessageSenderPositionSuffix,
+} TPIEmojiMessageSenderPosition;
+
 @interface TPIEmojiGenerator : NSObject {
 
 }
 
 @property (nonatomic, strong) NSMutableDictionary *overrideTable;
+@property (nonatomic, assign) TPIEmojiMessageSenderPosition messageSenderEmojiPosition;
 
 + (TPIEmojiGenerator *) sharedGenerator;
 

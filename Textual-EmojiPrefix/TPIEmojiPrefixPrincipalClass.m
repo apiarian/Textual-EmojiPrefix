@@ -15,14 +15,17 @@
 #import <CocoaExtensions/XRGlobalModels.h>
 
 NSString * const _userDefaultsOverrideTableKey = @"Private Extension Store -> Emoji Prefix Extension -> Override Table";
+NSString * const _userDefaultsMessageSenderEmojiPositionKey = @"Private Extension Store -> Emoji Prefix Extension -> Message Sender Emoji Position";
 
 @interface TPIEmojiPrefixPrincipalClass () <NSTableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet NSView *preferencesPane;
+@property (nonatomic, strong) IBOutlet NSSegmentedControl *messageSenderEmojiPositionControl;
 @property (nonatomic, strong) IBOutlet NSTableView *overrideTableView;
 @property (nonatomic, strong) IBOutlet NSTextField *playgroundNicknameField;
 @property (nonatomic, strong) IBOutlet NSTextField *playgroundEmojiField;
 
+- (IBAction)messageSenderEmojiPositionSelected:(id)sender;
 - (IBAction)addOverrideButtonClicked:(id)sender;
 - (IBAction)playgroundEmojiFieldAction:(id)sender;
 - (IBAction)removeOverrideButtonClicked:(id)sender;
@@ -37,16 +40,36 @@ NSString * const _userDefaultsOverrideTableKey = @"Private Extension Store -> Em
                                      owner:self
                            topLevelObjects:nil];  
     }];
+    
+    NSNumber *storedMessageSenderEmojiPosition = [RZUserDefaults() objectForKey:_userDefaultsMessageSenderEmojiPositionKey];
+    if (storedMessageSenderEmojiPosition != nil) {
+        [TPIEmojiGenerator sharedGenerator].messageSenderEmojiPosition = (TPIEmojiMessageSenderPosition)[storedMessageSenderEmojiPosition integerValue];
+    } else {
+        [TPIEmojiGenerator sharedGenerator].messageSenderEmojiPosition = TPIEmojiMessageSenderPositionPrefix;
+    }
+    [self.messageSenderEmojiPositionControl selectSegmentWithTag:[[TPIEmojiGenerator sharedGenerator] messageSenderEmojiPosition]];
+    
     NSDictionary *storedOverrideTable = [RZUserDefaults() objectForKey:_userDefaultsOverrideTableKey];
     if (storedOverrideTable != nil) {
         [[[TPIEmojiGenerator sharedGenerator] overrideTable] addEntriesFromDictionary:storedOverrideTable];
     }
+    
     [self.overrideTableView setDataSource:[[TPIEmojiGenerator sharedGenerator] overrideTable]];
 }
 
 - (void) pluginWillBeUnloadedFromMemory {
+    [RZUserDefaults() setObject:[NSNumber numberWithInteger:[[TPIEmojiGenerator sharedGenerator] messageSenderEmojiPosition]]
+                         forKey:_userDefaultsMessageSenderEmojiPositionKey];
     [RZUserDefaults() setObject:[[[TPIEmojiGenerator sharedGenerator] overrideTable] copy]
                          forKey:_userDefaultsOverrideTableKey];
+}
+
+- (IBAction)messageSenderEmojiPositionSelected:(id)sender {
+    TPIEmojiMessageSenderPosition originalPosition = [TPIEmojiGenerator sharedGenerator].messageSenderEmojiPosition;
+    [TPIEmojiGenerator sharedGenerator].messageSenderEmojiPosition = [self.messageSenderEmojiPositionControl selectedSegment];
+    if ([self.messageSenderEmojiPositionControl selectedSegment] != originalPosition) {
+        [worldController() reloadTheme];
+    }
 }
 
 - (IBAction)addOverrideButtonClicked:(id)sender {
@@ -113,7 +136,12 @@ NSString * const _userDefaultsOverrideTableKey = @"Private Extension Store -> Em
 - (NSString *)prefix_emoji_formattedNickname:(IRCChannel *) owner {
     NSString *original = [self prefix_emoji_formattedNickname:owner];
     NSString *emoji = [[TPIEmojiGenerator sharedGenerator] getEmojiForNickname:self.nickname];
-    return [NSString stringWithFormat:@"%@ %@", emoji, original];
+    switch ([[TPIEmojiGenerator sharedGenerator] messageSenderEmojiPosition]) {
+        case TPIEmojiMessageSenderPositionPrefix:
+            return [NSString stringWithFormat:@"%@ %@", emoji, original];
+        case TPIEmojiMessageSenderPositionSuffix:
+            return [NSString stringWithFormat:@"%@ %@", original, emoji];
+    }
 }
 
 @end
