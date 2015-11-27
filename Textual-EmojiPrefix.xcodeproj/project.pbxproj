@@ -9,24 +9,24 @@
 /* Begin PBXBuildFile section */
 		1F02F8FE1C036C9E009F1BFD /* TPIEmojiGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F8FD1C036C9E009F1BFD /* TPIEmojiGenerator.m */; };
 		1F02F9001C03E7B2009F1BFD /* TPIEmojiPrefixPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F02F8FF1C03E7B2009F1BFD /* TPIEmojiPrefixPane.xib */; };
-		1F02F9021C03FAEB009F1BFD /* CocoaExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F02F9011C03FA41009F1BFD /* CocoaExtensions.framework */; };
 		1F205D341C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */; };
 		1FE2B7F81C07594B00F19E8D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FE2B7F71C07594B00F19E8D /* LICENSE.txt */; };
+		1FF598DA1C08984A00DAF6FD /* CocoaExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF598D91C08984A00DAF6FD /* CocoaExtensions.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F02F8FC1C036C9E009F1BFD /* TPIEmojiGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPIEmojiGenerator.h; sourceTree = "<group>"; };
 		1F02F8FD1C036C9E009F1BFD /* TPIEmojiGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPIEmojiGenerator.m; sourceTree = "<group>"; };
 		1F02F8FF1C03E7B2009F1BFD /* TPIEmojiPrefixPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPIEmojiPrefixPane.xib; sourceTree = "<group>"; };
-		1F02F9011C03FA41009F1BFD /* CocoaExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaExtensions.framework; path = ../../../../../../Applications/Textual.app/Contents/Frameworks/CocoaExtensions.framework; sourceTree = "<group>"; };
 		1F205D281C02422B002A59C4 /* Textual-EmojiPrefix.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual-EmojiPrefix.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F205D2B1C02422B002A59C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPIEmojiPrefixPrincipalClass.h; sourceTree = "<group>"; };
 		1F205D331C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPIEmojiPrefixPrincipalClass.m; sourceTree = "<group>"; };
-		1F205D4A1C024D99002A59C4 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = ../../../../../../Applications/Textual.app/Contents/Headers; sourceTree = "<group>"; };
+		1F205D4A1C024D99002A59C4 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = /Applications/Textual.app/Contents/Headers; sourceTree = "<absolute>"; };
 		1FE2B7F61C07584500F19E8D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1FE2B7F71C07594B00F19E8D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
 		1FE2B7F91C075A1D00F19E8D /* Textual-EmojiPrefix-Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Textual-EmojiPrefix-Screenshot.png"; sourceTree = "<group>"; };
+		1FF598D91C08984A00DAF6FD /* CocoaExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaExtensions.framework; path = /Applications/Textual.app/Contents/Frameworks/CocoaExtensions.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F02F9021C03FAEB009F1BFD /* CocoaExtensions.framework in Frameworks */,
+				1FF598DA1C08984A00DAF6FD /* CocoaExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +63,7 @@
 		1F205D2A1C02422B002A59C4 /* Textual-EmojiPrefix */ = {
 			isa = PBXGroup;
 			children = (
-				1F02F9011C03FA41009F1BFD /* CocoaExtensions.framework */,
+				1FF598D91C08984A00DAF6FD /* CocoaExtensions.framework */,
 				1F205D4A1C024D99002A59C4 /* Headers */,
 				1F205D2B1C02422B002A59C4 /* Info.plist */,
 				1F205D321C024453002A59C4 /* TPIEmojiPrefixPrincipalClass.h */,
